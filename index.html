@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Discord Server Setup in 24h</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0d0f14;color:#e6e8ee;line-height:1.6}
+a{color:#8b9cff}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{padding:80px 0 60px;text-align:center;background:radial-gradient(ellipse at top,#2b2f6e 0%,#0d0f14 70%)}
+.tag{display:inline-block;background:#1c2040;color:#9aa6ff;border:1px solid #333a80;border-radius:99px;padding:4px 14px;font-size:14px;margin-bottom:18px}
+h1{font-size:clamp(32px,6vw,56px);line-height:1.1;margin-bottom:16px}
+h1 span{color:#5865f2}
+.sub{color:#aab0c0;font-size:18px;max-width:620px;margin:0 auto 28px}
+.btn{display:inline-block;background:#5865f2;color:#fff;text-decoration:none;padding:13px 26px;border-radius:10px;font-weight:600}
+.btn.ghost{background:transparent;border:1px solid #3a3f55;margin-left:10px}
+section{padding:60px 0}
+h2{font-size:30px;margin-bottom:24px;text-align:center}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:#151821;border:1px solid #242838;border-radius:14px;padding:22px}
+.card h3{margin-bottom:6px;font-size:18px}
+.card p,.card li{color:#aab0c0;font-size:15px}
+.ico{font-size:26px;margin-bottom:8px}
+.price{font-size:40px;font-weight:800;margin:6px 0}
+.pk ul{list-style:none;margin:14px 0}
+.pk li{padding:4px 0}.pk li:before{content:"✓ ";color:#57f287}
+.pk.hot{border-color:#5865f2;box-shadow:0 0 0 1px #5865f2}
+.steps{counter-reset:s}
+.steps .card:before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#5865f2;font-weight:700;margin-bottom:10px}
+details{background:#151821;border:1px solid #242838;border-radius:12px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{color:#aab0c0;margin-top:8px}
+.demo{text-align:center;border:1px dashed #3a3f55;border-radius:14px;padding:26px;color:#aab0c0}
+.contact{text-align:center}
+.disc{font-size:24px;font-weight:700;background:#151821;display:inline-block;padding:12px 24px;border-radius:10px;border:1px solid #242838;margin:12px 0}
+footer{text-align:center;color:#6b7185;padding:30px 0;font-size:14px}
+@media(max-width:500px){.btn.ghost{margin-left:10px}}
+
+body{overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#0b0c12}
+.bg i{position:absolute;width:42vmax;height:42vmax;border-radius:50%;filter:blur(90px);opacity:.35;animation:blob 22s ease-in-out infinite alternate}
+.bg i:nth-child(1){background:#7c3aed;top:-12%;left:-10%}
+.bg i:nth-child(2){background:#2563eb;top:30%;right:-15%;animation-delay:-6s}
+.bg i:nth-child(3){background:#ec4899;bottom:-15%;left:20%;animation-delay:-12s}
+.bg i:nth-child(4){background:#06b6d4;top:60%;left:-15%;width:30vmax;height:30vmax;animation-delay:-3s}
+@keyframes blob{0%{transform:translate(0,0) scale(1)}50%{transform:translate(8vw,6vh) scale(1.15)}100%{transform:translate(-6vw,-4vh) scale(.95)}}
+header{background:none!important;position:relative}
+h1 span,.grad{background:linear-gradient(90deg,#a78bfa,#60a5fa,#f472b6,#22d3ee,#a78bfa);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:shift 6s linear infinite;filter:drop-shadow(0 0 18px rgba(167,139,250,.45))}
+@keyframes shift{to{background-position:300% 0}}
+.card{background:rgba(21,24,33,.72)!important;backdrop-filter:blur(8px);transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:#7c83ff;box-shadow:0 12px 34px rgba(124,58,237,.35),0 0 0 1px rgba(96,165,250,.4)}
+.pk.hot{position:relative;border:none!important;box-shadow:none;background:#151821!important;z-index:0}
+.pk.hot:before{content:"";position:absolute;inset:-2px;border-radius:16px;z-index:-1;background:linear-gradient(90deg,#7c3aed,#2563eb,#ec4899,#06b6d4,#7c3aed);background-size:300% 100%;animation:shift 4s linear infinite}
+.pk.hot:after{content:"";position:absolute;inset:0;border-radius:14px;background:#151821;z-index:-1}
+.pk.hot .badge{position:absolute;top:-12px;right:16px;background:linear-gradient(90deg,#ec4899,#7c3aed);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px}
+.price{background:linear-gradient(90deg,#fff,#a5b4fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;background:linear-gradient(90deg,#5865f2,#7c3aed)}
+.btn.ghost{background:rgba(255,255,255,.04)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(88,101,242,.5)}
+.btn:after{content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
+.btn:hover:after{animation:shine .7s}
+@keyframes shine{to{left:130%}}
+.float{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.float span{position:absolute;font-size:30px;opacity:.55;animation:fl 7s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(6deg)}}
+header .wrap{position:relative;z-index:1}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.steps .card:before{background:linear-gradient(135deg,#7c3aed,#06b6d4)!important}
+.demo{background:rgba(21,24,33,.6);border-color:#5b5fc7!important}
+@media(max-width:600px){.float span{font-size:22px;opacity:.35}.bg i{filter:blur(60px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+<div class="bg"><i></i><i></i><i></i><i></i></div>
+<header><div class="float"><span style="top:18%;left:8%">🎮</span><span style="top:65%;left:12%;animation-delay:-2s">💬</span><span style="top:22%;right:10%;animation-delay:-4s">🎧</span><span style="top:70%;right:8%;animation-delay:-1s">🤖</span><span style="top:8%;left:46%;animation-delay:-3s">✨</span></div><div class="wrap">
+<div class="tag">Discord server setup service</div>
+<h1>Your Discord server,<br><span>set up in 24h</span></h1>
+<p class="sub">Channels, roles, permissions, rules, verification and bots, ready to go. You get a server template link, so I never need access to your account.</p>
+<a class="btn" href="#packages">See packages</a><a class="btn ghost" href="#contact">Contact</a>
+</div></header>
+
+<section class="reveal" id="included"><div class="wrap"><h2>What's included</h2><div class="grid">
+<div class="card"><div class="ico">📁</div><h3>Channels &amp; categories</h3><p>A clean structure for info, chat, media, voice and staff that fits your community.</p></div>
+<div class="card"><div class="ico">🛡️</div><h3>Roles &amp; permissions</h3><p>Owner, mods, members, subs and more, with permissions set up so nobody gets more access than they need.</p></div>
+<div class="card"><div class="ico">📜</div><h3>Rules &amp; welcome</h3><p>Clear server rules and a welcome channel that tells new members where to go.</p></div>
+<div class="card"><div class="ico">✅</div><h3>Verification</h3><p>A simple verify step to keep raids and spam bots out.</p></div>
+<div class="card"><div class="ico">🤖</div><h3>Free bots + guide</h3><p>Recommended free bots like Carl-bot and MEE6, with a step-by-step setup guide for reaction roles, auto-mod and welcome messages.</p></div>
+<div class="card"><div class="ico">🔗</div><h3>Template link</h3><p>Delivered as a Discord server template link. One click and the whole server is yours. No passwords, no account access.</p></div>
+</div></div></section>
+
+<section class="reveal" id="packages"><div class="wrap"><h2>Packages</h2><div class="grid">
+<div class="card pk"><h3>Starter</h3><div class="price">$5</div><p>For small friend groups and new servers.</p><ul><li>Up to 10 channels</li><li>Basic roles &amp; permissions</li><li>Rules + welcome channel</li><li>Template link</li></ul></div>
+<div class="card pk hot"><span class="badge">Most popular</span><h3>Creator</h3><div class="price">$10</div><p>For YouTubers, artists and growing communities.</p><ul><li>Full channel structure</li><li>Roles incl. mods &amp; supporters</li><li>Verification step</li><li>Free bot setup guide</li><li>1 revision</li></ul></div>
+<div class="card pk"><h3>VTuber / Streamer debut</h3><div class="price">$15</div><p>Everything you need for launch day.</p><ul><li>Everything in Creator</li><li>Stream alerts &amp; schedule channels</li><li>Sub / follower role setup guide</li><li>Self-assign reaction roles guide</li><li>2 revisions</li></ul></div>
+</div></div></section>
+
+<section class="reveal"><div class="wrap"><h2>How it works</h2><div class="grid steps">
+<div class="card"><h3>Message me</h3><p>Tell me on Discord what your server is for and pick a package.</p></div>
+<div class="card"><h3>Pay</h3><p>Payment before delivery. I'll confirm the details with you first.</p></div>
+<div class="card"><h3>I build it</h3><p>Your server is set up within 24 hours.</p></div>
+<div class="card"><h3>One click</h3><p>You get the template link and the bot guide, and create your server.</p></div>
+</div></div></section>
+
+<section class="reveal"><div class="wrap"><h2>Demo</h2><div class="demo">
+<p>Demo server template: <strong><a href="https://discord.new/w3k5pN6cv69N" target="_blank" rel="noopener">discord.new/w3k5pN6cv69N</a></strong></p>
+</div></div></section>
+
+<section class="reveal" id="faq"><div class="wrap" style="max-width:760px"><h2>FAQ</h2>
+<details><summary>Do you need access to my Discord account?</summary><p>No. You get a server template link and create the server yourself. Your account stays yours.</p></details>
+<details><summary>Do the bots come with the template?</summary><p>Discord templates don't include bots, so you get a short step-by-step guide to add and set up the free bots in a few minutes.</p></details>
+<details><summary>Can I use the template on a server I already have?</summary><p>Templates create a new server. If you want to keep your current members, I'll give you a written plan to rebuild your existing server step by step.</p></details>
+<details><summary>When do I pay?</summary><p>Payment comes before delivery. Message me and we'll sort out the details.</p></details>
+<details><summary>How fast is it?</summary><p>Within 24 hours after payment and once I have your info.</p></details>
+</div></section>
+
+<section class="reveal" id="contact"><div class="wrap contact"><h2>Contact</h2>
+<p>Send me a message on Discord:</p><div class="disc">Atrax Grok</div><p style="color:#aab0c0">Payment before delivery.</p>
+</div></section>
+<footer>Not affiliated with Discord Inc.</footer>
+<script>
+(function(){var els=document.querySelectorAll('.reveal');
+if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+els.forEach(function(e){io.observe(e)});})();
+</script>
+</body></html>
